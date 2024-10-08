@@ -24,8 +24,8 @@ app.post("/login", (req, res) =>{
     else{
         res.json("No record existed!")
     }
-   })
-})
+   });
+});
 
 
 app.post('/register', (req, res) => {
@@ -33,6 +33,10 @@ app.post('/register', (req, res) => {
     .then(users => res.json(users))
     .catch(err => res.json(err))
 })
+
+app.get("/newgame", (req, res) => {
+    res.send("New Game Coming Soon!");
+  });
 
 app.listen(3001, () =>{
     console.log("Server running!")

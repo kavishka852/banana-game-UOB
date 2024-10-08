@@ -1,0 +1,43 @@
+.dashboard {
+    text-align: center;
+    background-color: #f0f4f8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dashboard-header {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .dashboard-content {
+    margin-top: 60px;
+  }
+  
+  .menu-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .menu-item {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 40px;
+    margin: 10px;
+    border-radius: 8px;
+    width: 300px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .menu-item:hover {
+    background-color: #0056b3;
+  }
+  

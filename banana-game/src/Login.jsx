@@ -89,28 +89,38 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // State for loading spinner
-  const [error, setError] = useState(null); // State to handle errors
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null); // State for success messages
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true); // Set loading to true when form is submitted
-    setError(null); // Clear any previous errors
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null); // Clear previous messages
+
+    // Check for blank fields
+    if (!email || !password) {
+      setError("Please fill in all fields."); // Set error message for blank fields
+      setIsLoading(false);
+      return; // Exit the function early
+    }
 
     axios.post('http://localhost:3001/login', { email, password })
       .then(result => {
         if (result.data === "Success") {
-          navigate('/home');
+          setSuccessMessage("Successfully logged in!");
+          setTimeout(() => navigate('/home'), 2000); // Redirect after 2 seconds
         } else {
-          setError(result.data); // Set the error message from the response
+          setError(result.data);
         }
-        setIsLoading(false); // Stop loading after request
+        setIsLoading(false);
       })
       .catch(err => {
         console.log(err);
-        setError("An error occurred during login."); // Generic error message
-        setIsLoading(false); // Stop loading on error
+        setError("An error occurred during login.");
+        setIsLoading(false);
       });
   };
 
@@ -121,17 +131,14 @@ function Login() {
   };
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-      style={backgroundImageStyle}
-    >
+    <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundImage: `url(${background})`, backgroundSize: "cover", backgroundPosition: "center" }}>
       <div className="bg-white p-3 rounded w-25">
         <h2>Login</h2>
+        {successMessage && <div className="alert alert-success">{successMessage}</div>} {/* Success message */}
+        {error && <div className="alert alert-danger">{error}</div>} {/* Error message */}
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="email">
-              <strong>Email:</strong>
-            </label>
+            <label htmlFor="email"><strong>Email:</strong></label>
             <input
               type="email"
               placeholder="Enter email"
@@ -139,13 +146,11 @@ function Login() {
               name="email"
               className="form-control rounded-8"
               onChange={(e) => setEmail(e.target.value)}
-              disabled={isLoading} // Disable input when loading
+              disabled={isLoading}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="password">
-              <strong>Password:</strong>
-            </label>
+            <label htmlFor="password"><strong>Password:</strong></label>
             <input
               type="password"
               placeholder="Enter Password"
@@ -153,29 +158,21 @@ function Login() {
               name="password"
               className="form-control rounded-8"
               onChange={(e) => setPassword(e.target.value)}
-              disabled={isLoading} // Disable input when loading
+              disabled={isLoading}
             />
           </div>
-          {error && <p className="text-danger">{error}</p>} {/* Display error message */}
           <button
             type="submit"
             className="btn btn-success w-100 rounded-0"
-            disabled={isLoading} // Disable button when loading
+            disabled={isLoading}
           >
             {isLoading ? (
-              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> // Loading spinner
-            ) : (
-              "Login"
-            )}
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            ) : "Login"}
           </button>
         </form>
         <p>Don't have an account?</p>
-        <Link
-          to="/register"
-          className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
-        >
-          SignUp
-        </Link>
+        <Link to="/register" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">SignUp</Link>
       </div>
     </div>
   );
