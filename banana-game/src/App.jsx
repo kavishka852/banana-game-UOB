@@ -19,6 +19,7 @@ function App() {
         <Route path='/login' element={<Login notify={toast} />}></Route>
         <Route path='/home' element={<Home/>}></Route>
         <Route path='/newgame' element={<NewGame/>}></Route>
+        
       </Routes>
     </BrowserRouter>
   )

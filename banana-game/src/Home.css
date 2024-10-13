@@ -1,43 +1,81 @@
-.dashboard {
-    text-align: center;
-    background-color: #f0f4f8;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .dashboard-header {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  .dashboard-content {
-    margin-top: 60px;
-  }
-  
-  .menu-options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .menu-item {
-    background-color: #007bff;
-    color: white;
-    padding: 20px 40px;
-    margin: 10px;
-    border-radius: 8px;
-    width: 300px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .menu-item:hover {
-    background-color: #0056b3;
-  }
-  
+.home-page {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 50px 0;
+  background: linear-gradient(135deg, #ffeb3b, #f9a825);
+  color: #000000;
+}
+
+.home-page .container {
+  max-width: 100%; 
+}
+
+.card {
+  border-radius: 12px;
+}
+
+footer {
+  margin-top: auto;
+}
+
+footer h5 {
+  margin-bottom: 15px;
+}
+
+footer p, footer a {
+  font-size: 14px;
+  color: #aaa;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.card-stats {
+  background-color: #05005d; 
+}
+
+.card-new-game {
+  background-color: #05005d; 
+}
+
+.card-leaderboard {
+  background-color: #05005d; 
+}
+
+.card-title {
+  font-weight: bold; 
+}
+
+.card-text{
+  color: azure;
+}
+
+.navbar-custom {
+  background-color: #ffeb3b; /* Bright yellow */
+  border-bottom: 2px solid #ffc107; /* Darker yellow border */
+}
+
+.navbar-custom .navbar-brand {
+  color: #3f51b5; /* Indigo color for brand */
+  font-weight: bold;
+}
+
+.navbar-custom .nav-link {
+  color: #3f51b5; /* Indigo color for links */
+  transition: color 0.3s;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #d32f2f; /* Red color on hover */
+}
+
+.navbar-custom .nav-link.active {
+  font-weight: bold;
+  color: #d32f2f; /* Red color for active link */
+}

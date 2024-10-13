@@ -10,21 +10,38 @@ app.use(cors())
 
 mongoose.connect("mongodb://127.0.0.1:27017/bananagame")
 
-app.post("/login", (req, res) =>{
-   const {email, password}  = req.body;
-   UserModel.findOne({email:email})
-   .then(user =>{
-    if(user){
-       if(user.password === password){
-        res.json("Success")
-       } else {
-        res.json("The password is incorrect!")
-       }
-    }
-    else{
-        res.json("No record existed!")
-    }
-   });
+// app.post("/login", (req, res) =>{
+//    const {email, password}  = req.body;
+//    UserModel.findOne({email:email})
+//    .then(user =>{
+//     if(user){
+//        if(user.password === password){
+//         res.json("Success")
+//        } else {
+//         res.json("The password is incorrect!")
+//        }
+//     }
+//     else{
+//         res.json("No record existed!")
+//     }
+//    });
+// });
+
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+    UserModel.findOne({ email: email })
+        .then(user => {
+            if (user) {
+                if (user.password === password) {
+                    res.json({ message: "Success", user: { email: user.email } }); // Send user email
+                } else {
+                    res.json({ message: "The password is incorrect!" });
+                }
+            } else {
+                res.json({ message: "No record existed!" });
+            }
+        })
+        .catch(err => res.status(500).json({ message: "An error occurred." }));
 });
 
 
@@ -34,10 +51,7 @@ app.post('/register', (req, res) => {
     .catch(err => res.json(err))
 })
 
-app.get("/newgame", (req, res) => {
-    res.send("New Game Coming Soon!");
-  });
-
 app.listen(3001, () =>{
     console.log("Server running!")
 })
+
