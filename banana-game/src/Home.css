@@ -1,81 +1,93 @@
 .home-page {
-  background-color: #ffffff;
+  background-color: #fef5e7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .header {
-  padding: 50px 0;
-  background: linear-gradient(135deg, #ffeb3b, #f9a825);
-  color: #000000;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #ffe082, #ffca28);
+  color: #4e342e;
+  font-family: 'Comic Sans MS', cursive;
 }
 
-.home-page .container {
-  max-width: 100%; 
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 1.2rem;
 }
 
 .card {
-  border-radius: 12px;
+  border-radius: 15px;
 }
 
-footer {
-  margin-top: auto;
-}
-
-footer h5 {
-  margin-bottom: 15px;
-}
-
-footer p, footer a {
-  font-size: 14px;
-  color: #aaa;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-.card-stats {
-  background-color: #05005d; 
-}
-
-.card-new-game {
-  background-color: #05005d; 
-}
-
-.card-leaderboard {
-  background-color: #05005d; 
+.card-stats, .card-new-game, .card-leaderboard {
+  background-color: #ffeb3b; 
 }
 
 .card-title {
-  font-weight: bold; 
+  font-weight: bold;
+  font-family: 'Comic Sans MS', cursive;
 }
 
-.card-text{
-  color: azure;
+.card-text {
+  color: #4e342e;
+}
+
+.btn-banana {
+  background-color: #4e342e; 
+  color: white;
+  border-radius: 25px;
+}
+
+.btn-banana:hover {
+  background-color: #d84315; 
+  color: #ffeb3b; 
 }
 
 .navbar-custom {
-  background-color: #ffeb3b; /* Bright yellow */
-  border-bottom: 2px solid #ffc107; /* Darker yellow border */
+  background-color: #ffeb3b; 
+  border-bottom: 2px solid #ffca28;
 }
 
 .navbar-custom .navbar-brand {
-  color: #3f51b5; /* Indigo color for brand */
+  color: #4e342e; 
   font-weight: bold;
+  font-family: 'Comic Sans MS', cursive;
 }
 
 .navbar-custom .nav-link {
-  color: #3f51b5; /* Indigo color for links */
-  transition: color 0.3s;
+  color: #4e342e; 
 }
 
 .navbar-custom .nav-link:hover {
-  color: #d32f2f; /* Red color on hover */
+  color: #d84315; 
 }
 
 .navbar-custom .nav-link.active {
   font-weight: bold;
-  color: #d32f2f; /* Red color for active link */
+  color: #d84315; 
+}
+
+footer {
+  margin-top: auto;
+  background-color: #4e342e; 
+  color: #fff8e1;
+}
+
+footer h5, footer p, footer a {
+  font-family: 'Comic Sans MS', cursive;
+  color: #ffeb3b; 
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: #d84315;
+}
+.home-page .container {
+  max-width: 100%; 
 }

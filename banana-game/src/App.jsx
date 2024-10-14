@@ -7,6 +7,7 @@ import Home from './Home'
 import NewGame from './NewGame'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import GameLevels from './GameLevels'
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
         <Route path='/login' element={<Login notify={toast} />}></Route>
         <Route path='/home' element={<Home/>}></Route>
         <Route path='/newgame' element={<NewGame/>}></Route>
-        
+        <Route path='/levels' element={<GameLevels/>}></Route>
       </Routes>
     </BrowserRouter>
   )
