@@ -95,8 +95,9 @@
 // Import useEffect
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import background from "./img/background_image_banana.jpg";
+import background from "./img/background_image_banana.jpg"; // Use a game-themed background image
 import axios from 'axios';
+import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -112,7 +113,6 @@ function Login() {
     setError(null);
     setSuccessMessage(null);
 
-    // Check for blank fields
     if (!email || !password) {
       setError("Please fill in all fields.");
       setIsLoading(false);
@@ -122,7 +122,7 @@ function Login() {
     axios.post('http://localhost:3001/login', { email, password })
       .then(result => {
         if (result.data.message === "Success") {
-          localStorage.setItem('userEmail', result.data.user.email); // Store email in local storage
+          localStorage.setItem('userEmail', result.data.user.email);
           setSuccessMessage("Successfully logged in!");
           setTimeout(() => navigate('/home'), 2000);
         } else {
@@ -138,11 +138,12 @@ function Login() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundImage: `url(${background})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-      <div className="bg-white p-3 rounded w-25">
-        <h2>Login</h2>
-        {successMessage && <div className="alert alert-success">{successMessage}</div>}
-        {error && <div className="alert alert-danger">{error}</div>}
+    <div className="game-container">
+      <div className="overlay"></div>
+      <div className="login-box">
+        <h2 className="text-center game-title">🍌 Game Login</h2>
+        {successMessage && <div className="alert alert-success text-center">{successMessage}</div>}
+        {error && <div className="alert alert-danger text-center">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="email"><strong>Email:</strong></label>
@@ -151,7 +152,7 @@ function Login() {
               placeholder="Enter email"
               autoComplete="off"
               name="email"
-              className="form-control rounded-8"
+              className="form-control game-input"
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
             />
@@ -163,14 +164,14 @@ function Login() {
               placeholder="Enter Password"
               autoComplete="off"
               name="password"
-              className="form-control rounded-8"
+              className="form-control game-input"
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}
             />
           </div>
           <button
             type="submit"
-            className="btn btn-success w-100 rounded-0"
+            className="btn btn-success game-btn w-100"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -178,8 +179,8 @@ function Login() {
             ) : "Login"}
           </button>
         </form>
-        <p>Don't have an account?</p>
-        <Link to="/register" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">SignUp</Link>
+        <p className="text-center mt-3">Don't have an account?</p>
+        <Link to="/register" className="btn btn-default game-signup-btn w-100 text-decoration-none">Sign Up</Link>
       </div>
     </div>
   );

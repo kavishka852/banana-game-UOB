@@ -1,0 +1,35 @@
+.game-levels {
+    background-color: #f3e5f5; /* Light purple background for banana theme */
+    min-height: 100vh;
+    padding: 50px 0;
+  }
+  
+  .level-card {
+    border-radius: 12px;
+    transition: transform 0.3s;
+  }
+  
+  .level-card:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  
+  .easy-card {
+    background-color: #c6ff00; /* Light green for Easy */
+  }
+  
+  .medium-card {
+    background-color: #ffeb3b; /* Yellow for Medium */
+  }
+  
+  .hard-card {
+    background-color: #ff5722; /* Red for Hard */
+  }
+  
+  .card-title {
+    font-weight: bold;
+  }
+  
+  .card-text {
+    color: #000;
+  }
+  
