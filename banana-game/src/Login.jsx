@@ -97,7 +97,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import background from "./img/background_image_banana.jpg"; // Use a game-themed background image
 import axios from 'axios';
-import "./Login.css";
+import "./css/Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");

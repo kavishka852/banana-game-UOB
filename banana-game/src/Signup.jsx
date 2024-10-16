@@ -106,7 +106,7 @@ import { Link } from "react-router-dom";
 import background from "./img/background_image_banana.jpg";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; 
+import "./css/Login.css"; 
 
 function Signup() {
   const [name, setName] = useState("");
