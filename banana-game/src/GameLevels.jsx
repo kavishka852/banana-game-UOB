@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/GameLevels.css"; // Add your styles here
+import "./css/GameLevels.css"; 
 import { Link } from "react-router-dom";
 
 const GameLevels = () => {
@@ -14,7 +14,7 @@ const GameLevels = () => {
                 <p className="card-text">
                   A relaxed gameplay experience for beginners.
                 </p>
-                <Link to="/newgame" className="btn btn-light">
+                <Link to="/newgame?difficulty=easy" className="btn btn-light">
                    Play Easy
                 </Link>
               </div>
@@ -27,7 +27,7 @@ const GameLevels = () => {
                 <p className="card-text">
                   A balanced challenge for intermediate players.
                 </p>
-                <Link to="/newgame" className="btn btn-light">
+                <Link to="/newgame?difficulty=medium" className="btn btn-light">
                    Play Medium
                 </Link>
               </div>
@@ -40,7 +40,7 @@ const GameLevels = () => {
                 <p className="card-text">
                   A tough challenge for experienced players.
                 </p>
-                <Link to="/newgame" className="btn btn-light">
+                <Link to="/newgame?difficulty=hard" className="btn btn-light">
                    Play Hard
                 </Link>
               </div>
