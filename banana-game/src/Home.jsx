@@ -210,14 +210,37 @@
 // }
 
 // export default Home;
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Home.css";
-import GameLevels from "./GameLevels"; // Import the GameLevels component
+import "./css/Home.css";
+import GameLevels from "./GameLevels"; // Import GameLevels component
 
 function Home() {
-  const userEmail = localStorage.getItem("userEmail"); // Get email from local storage
+  const [showModal, setShowModal] = useState(false); // Modal state
+  const navigate = useNavigate(); // Hook for navigation
+
+  // Function to toggle modal visibility
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  // Get user email from localStorage
+  const userEmail = localStorage.getItem("userEmail");
+
+  // Function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("userEmail"); // Clear user email from localStorage
+    navigate("/login"); // Redirect to login page
+  };
+
+  // Optional: Redirect to login if not authenticated
+  useEffect(() => {
+    if (!userEmail) {
+      navigate("/login");
+    }
+  }, [userEmail, navigate]);
+
   return (
     <div className="home-page">
       <nav className="navbar navbar-expand-lg navbar-custom">
@@ -244,9 +267,9 @@ function Home() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/newgame">
+                <button className="nav-link btn btn-link" onClick={toggleModal}>
                   New Game
-                </Link>
+                </button>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/profile">
@@ -254,9 +277,15 @@ function Home() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/levels">
+                <Link className="nav-link" to="/settings">
                   Settings
                 </Link>
+              </li>
+              {/* Logout button */}
+              <li className="nav-item">
+                <button className="nav-link btn btn-link" onClick={handleLogout}>
+                  Logout
+                </button>
               </li>
             </ul>
           </div>
@@ -264,9 +293,7 @@ function Home() {
       </nav>
 
       <header className="header text-center">
-        <h1>
-          🍌 Welcome, {userEmail ? userEmail : "Player"} to Banana Game!
-        </h1>
+        <h1>🍌 Welcome, {userEmail ? userEmail : "Player"} to Banana Game!</h1>
         <p>Let the fun begin! Track your games, stats, and enjoy new challenges.</p>
       </header>
 
@@ -288,9 +315,9 @@ function Home() {
               <div className="card-body text-center">
                 <h4 className="card-title">New Games</h4>
                 <p className="card-text">Discover new challenges and games.</p>
-                <Link to="/newgame" className="btn btn-light btn-banana">
+                <button className="btn btn-light btn-banana" onClick={toggleModal}>
                   Start Game
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -307,6 +334,33 @@ function Home() {
           </div>
         </div>
       </main>
+
+      {/* Modal for Game Levels */}
+      {showModal && (
+        <div className="modal d-block" tabIndex="-1" role="dialog">
+          <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Choose Your Game Level</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  aria-label="Close"
+                  onClick={toggleModal}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <GameLevels /> {/* Load the GameLevels component inside the modal */}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={toggleModal}>
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="bg-dark text-white mt-5 pt-4 pb-4">
         <div className="container">
@@ -327,7 +381,7 @@ function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/newgame" className="text-white">
+                  <Link to="/levels" className="text-white">
                     New Game
                   </Link>
                 </li>
@@ -388,9 +442,7 @@ function Home() {
           <hr />
           <div className="row">
             <div className="col-md-12 text-center">
-              <p className="mb-0">
-                &copy; 2024 Banana Game. All Rights Reserved.
-              </p>
+              <p className="mb-0">&copy; 2024 Banana Game. All Rights Reserved.</p>
             </div>
           </div>
         </div>

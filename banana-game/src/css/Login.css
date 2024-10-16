@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('./img/background_image_banana.jpg');
+    background-image: url('../img/background_image_banana.jpg');
     background-size: cover;
     background-position: center;
     position: relative;

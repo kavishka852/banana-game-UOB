@@ -91,3 +91,39 @@ footer a:hover {
 .home-page .container {
   max-width: 100%; 
 }
+
+.modal .modal-header, .modal .modal-footer {
+  background-color: #df0000;
+  border-bottom: 2px solid #ee0101;
+}
+
+.modal .modal-title {
+  font-family: 'Comic Sans MS', cursive;
+  color: #4e342e;
+}
+
+.modal .btn-close {
+  color: #4e342e;
+}
+
+.modal .modal-body {
+  padding: 30px;
+}
+
+.modal-content {
+  max-height: 80vh; 
+  border-radius: 12px; 
+}
+
+.modal-body {
+  padding: 20px; 
+}
+
+.level-card {
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.level-card:hover {
+  transform: scale(1.05);
+}

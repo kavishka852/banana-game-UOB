@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './NewGame.css'; // Add your styling here
+import './css/NewGame.css'; // Add your styling here
 
 function NewGame() {
   const [questionImage, setQuestionImage] = useState('');
