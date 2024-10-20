@@ -27,6 +27,7 @@
   
   .card-title {
     font-weight: bold;
+    color: black;
   }
   
   .card-text {
@@ -35,4 +36,20 @@
   
   #level-title{
     font-family: 'Comic Sans MS', cursive;
+    color: #000000;
   }
+
+  .btn-light {
+    background: linear-gradient(45deg, #e68e00ba, #c3e91d); /* Add a gradient */
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    color: white;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  
+  .btn-light:hover {
+    transform: scale(1.05); /* Slight scale on hover */
+    background: linear-gradient(45deg, #1de9b6, #00e676); /* Change gradient on hover */
+  }
+  

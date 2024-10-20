@@ -34,6 +34,7 @@ app.post('/register', (req, res) => {
     .catch(err => res.json(err))
 })
 
+
 app.listen(3001, () =>{
     console.log("Server running!")
 })

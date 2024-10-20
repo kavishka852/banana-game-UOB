@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import background from "./img/background_image_banana.jpg";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "./css/Login.css"; 
