@@ -1,21 +1,30 @@
-import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./css/LeaderBoard.css";
 
 function LeaderBoard() {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
+  const [players, setPlayers] = useState([]);
 
   const goBackToHome = () => {
-    navigate("/home"); // Navigate to the home page
+    navigate("/home");
   };
 
-  const players = [
-    { rank: 1, name: "John Doe", score: 500 },
-    { rank: 2, name: "Jane Smith", score: 450 },
-    { rank: 3, name: "Mike Johnson", score: 400 },
-    { rank: 4, name: "Chris Lee", score: 350 },
-    { rank: 5, name: "Kate Brown", score: 300 },
-  ];
+  // Fetch leaderboard data from the server
+  useEffect(() => {
+    fetch("http://localhost:3001/leaderboard")
+      .then(response => response.json())
+      .then(data => {
+        // Map data to include ranks
+        const rankedPlayers = data.map((player, index) => ({
+          rank: index + 1,
+          name: player.email, // Assuming name is stored as email; replace if there's a `name` field
+          score: player.gamesWon,
+        }));
+        setPlayers(rankedPlayers);
+      })
+      .catch(err => console.error("Error fetching leaderboard data:", err));
+  }, []);
 
   return (
     <div className="leaderboard-container">
@@ -27,8 +36,8 @@ function LeaderBoard() {
         <h1 className="leaderboard-title">🏆 Leaderboard</h1>
 
         <div className="leaderboard-card">
-          {players.map((player, index) => (
-            <div className="player-card" key={index}>
+          {players.map((player) => (
+            <div className="player-card" key={player.rank}>
               <div className="player-rank">#{player.rank}</div>
               <div className="player-info">
                 <span className="player-name">{player.name}</span>

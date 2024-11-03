@@ -1,19 +1,35 @@
-.container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
+/* Full-page background */
+body {
+  background-image: url('../img/Leonardo_Phoenix_A.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  height: 100vh; 
+  margin: 0; 
 }
 
+/* Container for the game page */
+.container {
+  max-width: 600px; 
+  margin: auto;
+  padding: 20px; 
+  background: rgba(255, 255, 255, 0.8); 
+  border-radius: 10px; 
+}
+
+/* Heading styling */
 h2 {
   font-family: 'Arial', sans-serif;
   color: #333;
   margin-bottom: 20px;
 }
 
+/* Question section styling */
 .question-section {
   margin-bottom: 20px;
 }
 
+/* Image styling */
 img {
   max-width: 100%;
   height: auto;
@@ -21,12 +37,14 @@ img {
   border-radius: 10px;
 }
 
+/* Answer section styling */
 .answer-section {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Input styling */
 input {
   width: 80%;
   padding: 10px;
@@ -36,6 +54,7 @@ input {
   border-radius: 5px;
 }
 
+/* Button styling */
 button {
   padding: 10px 20px;
   font-size: 16px;
@@ -51,12 +70,14 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* Paragraph styling */
 p {
   font-family: 'Verdana', sans-serif;
   font-size: 18px;
   color: #666;
 }
 
+/* Timer styling */
 .timer {
   position: absolute;
   top: 10px;
@@ -91,6 +112,7 @@ p {
   animation: blink-animation 1s ease-in-out 5;
 }
 
+/* Replay button styling */
 .replay-button {
   align-items: center; 
   justify-content: center; 
