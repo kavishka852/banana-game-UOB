@@ -1,129 +1,108 @@
-.home-page {
-  background-color: #fef5e7;
-  min-height: 100vh;
+.game-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../img/Leonardo_Phoenix_A.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
-.header {
-  padding: 60px 0;
-  background: linear-gradient(135deg, #ffe082, #ffca28);
-  color: #4e342e;
-  font-family: 'Comic Sans MS', cursive;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); 
+  z-index: 1;
 }
 
-.header h1 {
-  font-size: 3rem;
+.login-box {
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px); 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.game-title {
+  font-family: 'Orbitron', "Comic Sans MS"; 
+  color: #eaf900;
+  text-shadow: 2px 2px 10px rgb(230 0 0);
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.game-input {
+  border-radius: 30px;
+  padding: 15px;
+  border: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.menu-container {
+  margin-bottom: 20px;
+  display: grid;
+}
+
+.game-btn {
+  background: linear-gradient(45deg, #e68e00ba, #c3e91d);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px; 
+  font-size: 1rem; 
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  transition: transform 0.3s ease;
   margin-bottom: 10px;
 }
 
-.header p {
-  font-size: 1.2rem;
+.game-btn:hover {
+  transform: scale(1.05); 
+  background: linear-gradient(45deg, #1de9b6, #00e676);
+  box-shadow: 0px 0px 15px 4px rgba(0, 230, 118, 0.8); 
 }
 
-.card {
-  border-radius: 15px;
-}
-
-.card-stats, .card-new-game, .card-leaderboard {
-  background-color: #ffeb3b; 
-}
-
-.card-title {
-  font-weight: bold;
-  font-family: 'Comic Sans MS', cursive;
-}
-
-.card-text {
-  color: #4e342e;
-}
-
-.btn-banana {
-  background-color: #4e342e; 
-  color: white;
-  border-radius: 25px;
-}
-
-.btn-banana:hover {
-  background-color: #d84315; 
-  color: #ffeb3b; 
-}
-
-.navbar-custom {
-  background-color: #ffeb3b; 
-  border-bottom: 2px solid #ffca28;
-}
-
-.navbar-custom .navbar-brand {
-  color: #4e342e; 
-  font-weight: bold;
-  font-family: 'Comic Sans MS', cursive;
-}
-
-.navbar-custom .nav-link {
-  color: #4e342e; 
-}
-
-.navbar-custom .nav-link:hover {
-  color: #d84315; 
-}
-
-.navbar-custom .nav-link.active {
-  font-weight: bold;
-  color: #d84315; 
-}
-
-footer {
-  margin-top: auto;
-  background-color: #4e342e; 
-  color: #fff8e1;
-}
-
-footer h5, footer p, footer a {
-  font-family: 'Comic Sans MS', cursive;
-  color: #ffeb3b; 
-}
-
-footer a:hover {
-  text-decoration: underline;
-  color: #d84315;
-}
-.home-page .container {
-  max-width: 100%; 
-}
-
-.modal .modal-header, .modal .modal-footer {
-  background-color: #df0000;
-  border-bottom: 2px solid #ee0101;
-}
-
-.modal .modal-title {
-  font-family: 'Comic Sans MS', cursive;
-  color: #4e342e;
-}
-
-.modal .btn-close {
-  color: #4e342e;
-}
-
-.modal .modal-body {
-  padding: 30px;
+.modal {
+  background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect for background */
 }
 
 .modal-content {
-  max-height: 80vh; 
-  border-radius: 12px; 
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent white for content */
+  border: none; /* Remove default border */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Soft shadow */
+  background-image: url('../img/Leonardo_Phoenix.jpg');
+}
+
+.modal-header, .modal-footer {
+  border: none; /* Remove borders */
+  color: #eaf900; /* Change text color for modern look */
 }
 
 .modal-body {
-  padding: 20px; 
+  color: #fff; /* White text for body */
+  padding: 20px; /* Add padding */
 }
 
-.level-card {
-  border-radius: 12px;
-  margin-bottom: 15px;
+.btn-close {
+  color: #eaf900; /* Change close button color */
+  opacity: 0.8; /* Slight transparency */
 }
 
-.level-card:hover {
-  transform: scale(1.05);
+.btn-close:hover {
+  opacity: 1; /* Full opacity on hover */
 }
+

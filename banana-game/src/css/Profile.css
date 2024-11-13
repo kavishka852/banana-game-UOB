@@ -1,0 +1,122 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../img/Leonardo_Phoenix_A.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+  
+  .profile-box {
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    width: 500px;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .menu-container {
+    display: grid;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-image-container {
+    margin-bottom: 20px;
+  }
+  
+  .profile-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.9);
+    border: 5px solid #fff;
+  }
+  
+  .profile-info {
+    width: 100%;
+  }
+  
+  .profile-details {
+    width: 100%;
+    background: linear-gradient(45deg, #FF8C00, #FF3E00);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    transition: transform 0.3s ease, background 0.3s ease;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .profile-details:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #FF3E00, #FFC107);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+  }
+  
+  .profile-details:focus {
+    outline: none;
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);
+  }
+  
+  .email-det {
+    border-radius: 30px;
+    padding: 15px;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+    color: white;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 20px;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
+    z-index: 3;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
