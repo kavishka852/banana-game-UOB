@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     gamesWon: { type: Number, default: 0 },
     beststreak: { type: Number, default: 0 },
     besttime: { type: Number, default: Infinity }, // Default to Infinity to track minimum time
+    currentStreak: { type: Number, default: 0 }, // Add this field to track current streak
     rank: { type: Number, default: 0 }
 });
 

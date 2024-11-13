@@ -1,59 +1,75 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const UserModel = require("./models/User");
 const LevelModel = require("./models/Level");
+require("dotenv").config();
 
 const app = express();
+const PORT = 3001;
+
 app.use(express.json());
 app.use(cors());
+
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
+
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/bananagame")
   .then(() => {
     console.log("Connected to MongoDB");
-
-    // Check if levels collection is empty, then seed
-    LevelModel.countDocuments().then((count) => {
-      if (count === 0) {
-        const levels = [
-          { levelname: "Level 1", difficulty: "easy", leveltime: 50 },
-          { levelname: "Level 2", difficulty: "medium", leveltime: 20 },
-          { levelname: "Level 3", difficulty: "hard", leveltime: 10 },
-        ];
-
-        LevelModel.insertMany(levels)
-          .then(() => console.log("Difficulty levels seeded"))
-          .catch((err) =>
-            console.error("Error seeding difficulty levels:", err)
-          );
-      }
-    });
   })
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  UserModel.findOne({ email: email })
-    .then((user) => {
-      if (user) {
-        if (user.password === password) {
-          res.json({ message: "Success", user: { email: user.email } }); // Send user email
-        } else {
-          res.json({ message: "The password is incorrect!" });
-        }
-      } else {
-        res.json({ message: "No record existed!" });
-      }
-    })
-    .catch((err) => res.status(500).json({ message: "An error occurred." }));
-});
+  app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+    
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: "Incorrect password" });
+    }
+  
+    // Generate JWT token
+    const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET_KEY, { expiresIn: "1h" });
+    res.status(200).json({ message: "Success", token, user });
+  });
+  
+  
 
-app.post("/register", (req, res) => {
-  UserModel.create(req.body)
-    .then((users) => res.json(users))
-    .catch((err) => res.json(err));
-});
+  app.post("/register", async (req, res) => {
+    const { email, password, name } = req.body;
+  
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email is already registered" });
+    }
+  
+    const hashedPassword = await bcrypt.hash(password, 10);
+  
+    const newUser = new UserModel({ email, password: hashedPassword, name });
+    await newUser.save();
+  
+    res.status(201).json({ message: "User created successfully" });
+  });
+  
+// Middleware to verify JWT
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(403).json({ message: "No token provided" });
+
+  jwt.verify(token, JWT_SECRET_KEY, (err, decoded) => {
+    if (err) return res.status(401).json({ message: "Unauthorized" });
+    req.user = decoded;
+    next();
+  });
+};
 
 app.get("/levels", (req, res) => {
   LevelModel.find({})
@@ -74,12 +90,22 @@ app.put("/updateStats", (req, res) => {
       // Update stats if the game was won
       if (isWin) {
         user.gamesWon += 1;
-        user.beststreak += 1; // Increase streak
+
+        // If the user won the game, increase streak; if the previous streak was reset (because of a loss), start from 1
+        user.currentStreak = user.currentStreak ? user.currentStreak + 1 : 1;
+
+        // Update beststreak if the current streak is the best
+        if (user.currentStreak > user.beststreak) {
+          user.beststreak = user.currentStreak;
+        }
 
         // Update best time if the current time is better, or if this is the first time
         if (user.besttime == null || timeTaken > user.besttime) {
-          user.besttime = timeTaken;
+          user.besttime = timeTaken; // Set the best time to the lower (better) time
         }
+      } else {
+        // If the user lost, reset the streak to 0
+        user.currentStreak = 0;
       }
 
       // Save updated user stats
@@ -94,6 +120,8 @@ app.put("/updateStats", (req, res) => {
       res.status(500).json({ message: "Error finding user", error: err })
     );
 });
+
+
 
 app.get("/user/profile/:email", (req, res) => {
   const { email } = req.params;

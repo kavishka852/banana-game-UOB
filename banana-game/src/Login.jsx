@@ -23,22 +23,24 @@ function Login() {
       return;
     }
 
-    axios.post('http://localhost:3001/login', { email, password })
-      .then(result => {
-        if (result.data.message === "Success") {
-          localStorage.setItem('userEmail', result.data.user.email);
-          setSuccessMessage("Successfully logged in!");
-          setTimeout(() => navigate('/home'), 2000);
-        } else {
-          setError(result.data.message);
-        }
-        setIsLoading(false);
-      })
-      .catch(err => {
-        console.log(err);
-        setError("An error occurred during login.");
-        setIsLoading(false);
-      });
+    axios
+    .post('http://localhost:3001/login', { email, password })
+    .then(result => {
+      if (result.data.message === "Success") { // This matches the backend response
+        localStorage.setItem("token", result.data.token);
+        localStorage.setItem("userEmail", result.data.user.email);
+        setSuccessMessage("Successfully logged in!");
+        setTimeout(() => navigate('/home'), 2000); // Navigate to home page after login
+      } else {
+        setError(result.data.message); // Show the error message
+      }
+      setIsLoading(false);
+    })
+    .catch(err => {
+      console.log(err);
+      setError("An error occurred during login.");
+      setIsLoading(false);
+    });
   };
 
   return (

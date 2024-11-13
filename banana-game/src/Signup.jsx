@@ -17,7 +17,7 @@ function Signup() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-    setSuccessMessage(null); // Clear previous messages
+    setSuccessMessage(null); 
 
     // Check for blank fields
     if (!name || !email || !password) {
@@ -27,16 +27,21 @@ function Signup() {
     }
 
     axios.post('http://localhost:3001/register', { name, email, password })
-      .then(result => {
-        setSuccessMessage("Successfully registered!"); // Set success message
-        setTimeout(() => navigate('/login'), 2000); // Redirect after 2 seconds
-        setIsLoading(false);
-      })
-      .catch(err => {
-        console.log(err);
+    .then(result => {
+      setSuccessMessage("Successfully registered!"); // Set success message
+      setTimeout(() => navigate('/login'), 2000); // Redirect after 2 seconds
+      setIsLoading(false);
+    })
+    .catch(err => {
+      setIsLoading(false);
+      
+      // Check if the error is coming from the response and has the message
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);  // Display backend error message
+      } else {
         setError("An error occurred during registration.");
-        setIsLoading(false);
-      });
+      }
+    });
   };
 
   return (

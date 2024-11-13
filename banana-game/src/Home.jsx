@@ -13,6 +13,8 @@ function Home() {
   // Function to handle logout
   const handleLogout = () => {
     localStorage.removeItem("userEmail");
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     navigate("/login");
   };
 
