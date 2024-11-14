@@ -12,7 +12,7 @@ function LeaderBoard() {
 
   // Fetch leaderboard data from the server
   useEffect(() => {
-    fetch("http://localhost:3001/leaderboard")
+    fetch("http://localhost:3001/user/leaderboard")
       .then(response => response.json())
       .then(data => {
         // Map data to include ranks
