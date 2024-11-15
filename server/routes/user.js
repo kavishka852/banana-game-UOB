@@ -20,29 +20,39 @@ router.get("/profile/:email", async (req, res) => {
 
 // Update User Stats
 router.put("/updateStats", async (req, res) => {
-  const { email, isWin, timeTaken } = req.body;
-
-  try {
-    const user = await UserModel.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-    user.gameplayed += 1;
-
-    if (isWin) {
-      user.gamesWon += 1;
-      user.currentStreak = user.currentStreak ? user.currentStreak + 1 : 1;
-      if (user.currentStreak > user.beststreak) user.beststreak = user.currentStreak;
-      if (user.besttime == null || timeTaken > user.besttime) user.besttime = timeTaken;
-    } else {
-      user.currentStreak = 0;
+    const { email, isWin, timeTaken } = req.body;
+  
+    try {
+      const user = await UserModel.findOne({ email });
+      if (!user) return res.status(404).json({ message: "User not found" });
+  
+      user.gameplayed += 1;
+  
+      if (isWin) {
+        user.gamesWon += 1;
+        user.currentStreak = user.currentStreak ? user.currentStreak + 1 : 1;
+  
+        // Update best streak only if the current streak is greater than the best streak
+        if (user.currentStreak > user.beststreak) {
+          user.beststreak = user.currentStreak;
+        }
+  
+        // Update best time if the time taken is greater than the current best time
+        if (user.besttime == null || timeTaken > user.besttime) {
+          user.besttime = timeTaken;
+        }
+      } else {
+        // Reset current streak on a loss
+        user.currentStreak = 0;
+      }
+  
+      await user.save();
+      res.json({ message: "Stats updated successfully", user });
+    } catch (err) {
+      res.status(500).json({ message: "Error updating stats", error: err });
     }
-
-    await user.save();
-    res.json({ message: "Stats updated successfully", user });
-  } catch (err) {
-    res.status(500).json({ message: "Error updating stats", error: err });
-  }
-});
+  });
+  
 
 // Get Leaderboard
 router.get("/leaderboard", async (req, res) => {

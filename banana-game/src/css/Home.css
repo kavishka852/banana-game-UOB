@@ -75,7 +75,6 @@
 }
 
 .modal {
-  background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
   backdrop-filter: blur(10px); /* Blur effect for background */
 }
 
@@ -84,7 +83,7 @@
   border: none; /* Remove default border */
   border-radius: 15px; /* Rounded corners */
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Soft shadow */
-  background-image: url('../img/Leonardo_Phoenix.jpg');
+  background-image: url('../img/bananacastle.png');
 }
 
 .modal-header, .modal-footer {
