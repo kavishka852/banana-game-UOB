@@ -26,7 +26,7 @@ function Signup() {
       return;
     }
 
-    axios.post('http://localhost:3001/register', { name, email, password })
+    axios.post('http://localhost:3001/auth/register', { name, email, password })
     .then(result => {
       setSuccessMessage("Successfully registered!"); // Set success message
       setTimeout(() => navigate('/login'), 2000); // Redirect after 2 seconds

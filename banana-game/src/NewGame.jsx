@@ -248,7 +248,7 @@ function NewGame() {
     }
 
     try {
-        await fetch("http://localhost:3001/updateStats", {
+        await fetch("http://localhost:3001/user/updateStats", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

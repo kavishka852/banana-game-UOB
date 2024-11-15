@@ -24,7 +24,7 @@ function Login() {
     }
 
     axios
-    .post('http://localhost:3001/login', { email, password })
+    .post('http://localhost:3001/auth/login', { email, password })
     .then(result => {
       if (result.data.message === "Success") { // This matches the backend response
         localStorage.setItem("token", result.data.token);
