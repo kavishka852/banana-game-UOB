@@ -1,26 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";  
+import "react-toastify/dist/ReactToastify.css";
 import "./css/Home.css";
-import GameLevels from "./GameLevels"; // Import GameLevels component
+import GameLevels from "./GameLevels";
 
 function Home() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail");
-
-  // Modal state
   const [showModal, setShowModal] = useState(false);
+  const [isFortuneDisabled, setIsFortuneDisabled] = useState(false);
 
-  // Function to handle logout
+  useEffect(() => {
+    const played = localStorage.getItem(`${userEmail}_dailyChallengePlayed`);
+    if (played === 'true') {
+      setIsFortuneDisabled(true);
+    }
+  }, [userEmail]);
+
   const handleLogout = () => {
     localStorage.removeItem("userEmail");
+    localStorage.removeItem(`${userEmail}_dailyChallengePlayed`);
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
     navigate("/login");
   };
 
-  // Function to toggle modal visibility
   const toggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const handleFortuneClick = () => {
+    const played = localStorage.getItem(`${userEmail}_dailyChallengePlayed`);
+    if (played === 'true') {
+      toast.info("You Already Played the Daily Challenge!");  
+      console.log("Plyed");
+    } else {
+      navigate("/dailychallenge");
+    }
   };
 
   return (
@@ -64,8 +81,7 @@ function Home() {
                 ></button>
               </div>
               <div className="modal-body">
-                <GameLevels />{" "}
-                {/* Load the GameLevels component inside the modal */}
+                <GameLevels />
               </div>
               <div className="modal-footer">
                 <button
@@ -80,6 +96,18 @@ function Home() {
           </div>
         </div>
       )}
+
+      <div className="fortune-box">
+        <button
+          className="fortune-btn"
+          onClick={handleFortuneClick} 
+          // disabled={isFortuneDisabled}
+        >
+          🎰
+        </button>
+      </div>
+
+      <ToastContainer /> 
     </div>
   );
 }

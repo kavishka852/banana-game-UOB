@@ -10,6 +10,7 @@ import GameLevels from './GameLevels'
 import Profile from './Profile'
 import Instructions from './Instructions'
 import LeaderBoard from './LeaderBoard'
+import DailyCahllenge from './DailyCahllenge'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/instructions' element={<Instructions/>}></Route>
         <Route path='/leaderboard' element={<LeaderBoard/>}></Route>
+        <Route path='/dailychallenge' element={<DailyCahllenge/>}></Route>
       </Routes>
     </BrowserRouter>
   )
