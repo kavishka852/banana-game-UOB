@@ -58,7 +58,7 @@ input {
 button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #007bff;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
   border-radius: 5px;
@@ -134,4 +134,62 @@ p {
 
 .replay-button i {
   margin-right: 8px; 
+}
+
+.new-game-page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.question-section img {
+  width: 100%;
+  max-width: 500px;
+}
+
+.result-card-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.result-card .card {
+  width: 500px;
+  height: 254px;
+  border-radius: 30px;
+  background: #e0e0e0;
+  box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+}
+
+.result-card .card-body {
+  padding: 25px;
+}
+
+.result-card .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.result-card .card-text {
+  font-size: 1rem;
+  margin-top: 10px;
+  color: #666;
+}
+
+.text-success {
+  color: #28a745;
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+.coin-emoji {
+  font-size: 1.25rem;
+  color: #f39c12;
+  margin-top: 10px;
+  font-weight: bold;
 }
