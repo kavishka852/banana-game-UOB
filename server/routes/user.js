@@ -98,4 +98,36 @@ router.get("/leaderboard", async (req, res) => {
   }
 });
 
+//upadte user's coins 
+router.put("/updateCoins", async (req, res) => {
+  const { email, coinsEarned } = req.body;
+
+  try {
+    const user = await UserModel.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.totalCoins += parseInt(coinsEarned, 10); // Update the total coins
+    await user.save();
+
+    res.json({ message: "Coins updated successfully", totalCoins: user.totalCoins });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating coins", error });
+  }
+});
+
+// Get Logged-in User's Total Coins
+router.get("/totalCoins", verifyToken, async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({ totalCoins: user.totalCoins });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching total coins", error });
+  }
+});
+
+
+
 module.exports = router;
