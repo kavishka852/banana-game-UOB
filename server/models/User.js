@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
     beststreak: { type: Number, default: 0 },
     besttime: { type: Number, default: Infinity }, // Default to Infinity to track minimum time
     currentStreak: { type: Number, default: 0 }, // Add this field to track current streak
-    rank: { type: Number, default: 0 }
+    rank: { type: Number, default: 0 },
+    totalCoins: { type: Number, default: 0 }
 });
 
 const UserModel = mongoose.model("users", UserSchema);
